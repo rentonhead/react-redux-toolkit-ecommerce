@@ -28,6 +28,27 @@ const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase();
+    builder.addCase(getProducts.pending, (state, action) => {
+      state.productsStatus = STATUS.LOADING;
+    });
+    builder.addCase(getProducts.fulfilled, (state, action) => {
+      state.productsStatus = STATUS.SUCCESS;
+      state.products = action.payload;
+    });
+    builder.addCase(getProducts.rejected, (state, action) => {
+      state.productsStatus = STATUS.FAIL;
+    });
+    builder.addCase(getDetailProduct.pending, (state, action) => {
+      state.productDetailStatus = STATUS.LOADING;
+    });
+    builder.addCase(getDetailProduct.fulfilled, (state, action) => {
+      state.productDetailStatus = STATUS.SUCCESS;
+      state.productDetail = action.payload;
+    });
+    builder.addCase(getDetailProduct.rejected, (state, action) => {
+      state.productDetailStatus = STATUS.FAIL;
+    });
   },
 });
+
+export default productSlice.reducer;
