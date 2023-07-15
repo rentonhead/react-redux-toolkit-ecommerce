@@ -3,7 +3,7 @@ import React from "react";
 const Product = ({ product }) => {
   return (
     <div className="w-[450px] p-3 m-2 border rounded-md relative cursor-pointer">
-      <div className="text-3xl font-bold absolute rounded-md top-0 right-0 bg-black text-white p-2 m-1">
+      <div className="text-3xl font-bold absolute rounded-md top-0 right-0 bg-gray-700 text-white p-2 m-1">
         {product?.price}
         <span className="text-sm">TL</span>
       </div>
