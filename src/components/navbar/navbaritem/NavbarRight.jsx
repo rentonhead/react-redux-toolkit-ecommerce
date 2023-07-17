@@ -1,22 +1,37 @@
-import React from 'react'
-import {BiSearch} from 'react-icons/bi'
-import {AiOutlineHeart} from 'react-icons/ai'
-import {FiShoppingCart} from 'react-icons/fi'
+import React, { useEffect } from "react";
+import { BiSearch } from "react-icons/bi";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FiShoppingCart } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartTotal } from "../../../redux/cartSlice";
 
 const NavbarRight = () => {
-  return (
-    <div className='flex items-center gap-8'>
-        <div className='flex items-center border p-3 rounded-full bg-gray-200'>
-            <input className='bg-gray-200 outline-none' type="text" placeholder='Search...' />
-            <BiSearch size={28} />
-        </div>
-        <AiOutlineHeart size={28}/>
-        <div className='relative'>
-            <div className='absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center'>3</div>
-            <FiShoppingCart size={28} />
-        </div>
-    </div>
-  )
-}
+  const dispatch = useDispatch();
+  const { carts } = useSelector((state) => state.carts);
 
-export default NavbarRight
+  useEffect(() => {
+    dispatch(getCartTotal());
+  }, [dispatch]);
+
+  return (
+    <div className="flex items-center gap-8">
+      <div className="flex items-center border p-3 rounded-full bg-gray-200">
+        <input
+          className="bg-gray-200 outline-none"
+          type="text"
+          placeholder="Search..."
+        />
+        <BiSearch size={28} />
+      </div>
+      <AiOutlineHeart size={28} />
+      <div className="relative">
+        <div className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
+          {carts?.length}
+        </div>
+        <FiShoppingCart size={28} />
+      </div>
+    </div>
+  );
+};
+
+export default NavbarRight;
