@@ -1,8 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ product }) => {
+  const navigate = useNavigate();
   return (
-    <div className="w-[450px] p-3 m-2 border rounded-md relative cursor-pointer">
+    <div
+      onClick={() => navigate(`products/${product?.id}`)}
+      className="w-[450px] p-3 m-2 border rounded-md relative cursor-pointer"
+    >
       <div className="text-3xl font-bold absolute rounded-md top-0 right-0 bg-gray-700 text-white p-2 m-1">
         {product?.price}
         <span className="text-sm">TL</span>
