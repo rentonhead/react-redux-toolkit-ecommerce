@@ -46,9 +46,7 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const tempCart = state.carts.filter(
-        (item) => item.id !== action.payload.id
-      );
+      const tempCart = state.carts.filter((item) => item.id !== action.payload);
       state.carts = tempCart;
       storeInLocalStorage(state.carts);
     },
@@ -58,7 +56,7 @@ const cartSlice = createSlice({
     },
     getCartTotal: (state) => {
       state.totalAmount = state.carts.reduce((cartTotal, cartItem) => {
-        return (cartTotal += cartItem.totalPrice);
+        return (cartTotal += cartItem.price * cartItem.quantity);
       }, 0);
       state.itemCount = state.carts.length;
     },
